@@ -89,11 +89,49 @@ fn main() {
         .add_item(open_explorer)
     ); // 仓库菜单
 
+    let new_branch = CustomMenuItem::new("new_branch".to_string(), "新建");
+    let rename_branch = CustomMenuItem::new("rename_branch".to_string(), "重命名");
+    let delete_branch = CustomMenuItem::new("delete_branch".to_string(), "删除");
+    let discard_changes = CustomMenuItem::new("discard_changes".to_string(), "放弃更改");
+    let stash = CustomMenuItem::new("stash".to_string(), "暂存更改");
+    let fetch = CustomMenuItem::new("fetch".to_string(), "获取更新");
+    let compare = CustomMenuItem::new("compare".to_string(), "与其他分支比较");
+    let merge = CustomMenuItem::new("merge".to_string(), "合并到当前分支");
+    let zip_merge = CustomMenuItem::new("zip_merge".to_string(), "压缩合并到当前分支");
+    let rebase = CustomMenuItem::new("rebase".to_string(), "变基当前分支");
+    let compare_web = CustomMenuItem::new("compare_web".to_string(), "在 Github 上比较");
+    let view_web = CustomMenuItem::new("view_web".to_string(), "在 Github 上查看");
+    let preview_pr = CustomMenuItem::new("preview_pr".to_string(), "预览拉取请求");
+    let pr_web = CustomMenuItem::new("pr_web".to_string(), "在 Github 上查看拉取请求");
+
+    let branch_menu = Submenu::new(
+        "分支",
+        Menu::new()
+        .add_item(new_branch)
+        .add_item(rename_branch)
+        .add_item(delete_branch)
+        .add_native_item(MenuItem::Separator)
+        .add_item(discard_changes)
+        .add_item(stash)
+        .add_item(fetch)
+        .add_native_item(MenuItem::Separator)
+        .add_item(compare)
+        .add_item(merge)
+        .add_item(zip_merge)
+        .add_item(rebase)
+        .add_native_item(MenuItem::Separator)
+        .add_item(compare_web)
+        .add_item(view_web)
+        .add_item(preview_pr)
+        .add_item(pr_web)
+    ); // 分支菜单
+
     let menu = Menu::new()
         .add_submenu(file_menu)
         .add_submenu(edit_menu)
         .add_submenu(view_menu)
-        .add_submenu(repo_menu);
+        .add_submenu(repo_menu)
+        .add_submenu(branch_menu);
 
     tauri::Builder::default()
         .menu(menu)
