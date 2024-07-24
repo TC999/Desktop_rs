@@ -126,12 +126,30 @@ fn main() {
         .add_item(pr_web)
     ); // 分支菜单
 
+    let issue_url = CustomMenuItem::new("issue_url".to_string(), "问题反馈");
+    let guide = CustomMenuItem::new("guide".to_string(), "用户指南");
+    let short_key = CustomMenuItem::new("short_key".to_string(), "快捷键");
+    let log = CustomMenuItem::new("log".to_string(), "日志");
+    let about = CustomMenuItem::new("about".to_string(), "关于");
+
+    let help_menu = Submenu::new(
+        "帮助",
+        Menu::new()
+        .add_item(issue_url)
+        .add_item(guide)
+        .add_item(short_key)
+        .add_item(log)
+        .add_native_item(MenuItem::Separator)
+        .add_item(about)
+    );
+
     let menu = Menu::new()
         .add_submenu(file_menu)
         .add_submenu(edit_menu)
         .add_submenu(view_menu)
         .add_submenu(repo_menu)
-        .add_submenu(branch_menu);
+        .add_submenu(branch_menu)
+        .add_submenu(help_menu);
 
     tauri::Builder::default()
         .menu(menu)
